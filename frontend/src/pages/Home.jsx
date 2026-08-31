@@ -3,8 +3,10 @@ import {
   ArrowUpRight,
   BriefcaseBusiness,
   CalendarDays,
+  Code2,
   Download,
   Mail,
+  Sparkles,
   Star,
   Users,
 } from 'lucide-react'
@@ -12,6 +14,7 @@ import { GithubIcon, LinkedinIcon } from '@components/ui/icons/BrandIcons.jsx'
 import Section from '@components/ui/Section.jsx'
 import Heading from '@components/ui/Heading.jsx'
 import Button from '@components/ui/Button.jsx'
+import Badge from '@components/ui/Badge.jsx'
 import Card from '@components/ui/Card.jsx'
 import TechTag from '@components/ui/TechTag.jsx'
 import CTASection from '@components/sections/CTASection.jsx'
@@ -24,7 +27,7 @@ export default function Home() {
     { icon: CalendarDays, value: '2+', label: 'Years of Experience' },
     { icon: BriefcaseBusiness, value: '15+', label: 'Projects Completed' },
     { icon: Users, value: '10+', label: 'Happy Clients' },
-    { icon: Star, value: '5+', label: 'Average Rating' },
+    { icon: Star, value: '5.0', label: 'Average Rating' },
   ]
 
   const socialLinks = [
@@ -34,38 +37,50 @@ export default function Home() {
     { label: 'Projects', href: '/projects', icon: ArrowUpRight },
   ]
 
+  const focusPoints = [
+    'Responsive frontends',
+    'Scalable APIs',
+    'Production-ready UI',
+    'Clean handoff',
+  ]
+
   return (
     <>
-      <Section className="pt-8 sm:pt-10 lg:pt-12" containerClassName="max-w-[1200px]">
+      <Section className="pt-8 sm:pt-10 lg:pt-12" containerClassName="max-w-[1220px]">
         <motion.div
-          initial={{ opacity: 0, y: 22 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
-          className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#07080d] px-5 py-8 text-left shadow-[0_40px_120px_rgba(0,0,0,0.55)] sm:px-8 sm:py-10 lg:px-12 lg:py-12"
+          transition={{ duration: 0.65, ease: [0.25, 1, 0.5, 1] }}
+          className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[#06070b] text-left shadow-[0_40px_120px_rgba(0,0,0,0.55)]"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(118,73,255,0.2),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.07),transparent_20%),radial-gradient(circle_at_70%_60%,rgba(106,66,255,0.42),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent_35%)]" />
-          <div className="absolute inset-0 rounded-[32px] border border-white/5" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(120,74,255,0.18),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.08),transparent_18%),radial-gradient(circle_at_68%_62%,rgba(124,58,237,0.4),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent_30%)]" />
+          <div className="absolute inset-0 rounded-[34px] border border-white/5" />
 
-          <div className="relative grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
+          <div className="relative grid items-center gap-10 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.02fr_0.98fr] lg:px-12 lg:py-12">
             <motion.div
-              initial={{ opacity: 0, x: -18 }}
+              initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.05, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.65, delay: 0.05, ease: [0.25, 1, 0.5, 1] }}
               className="max-w-2xl"
             >
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-white/70">
+              <Badge tone="accent" dot className="border-white/10 bg-white/5 text-white/75">
+                Available for Freelance Projects
+              </Badge>
+
+              <p className="mt-6 text-sm font-semibold uppercase tracking-[0.28em] text-white/60">
                 Hello, I&apos;m
               </p>
-              <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl lg:text-7xl">
+              <h1 className="mt-3 text-4xl font-semibold tracking-[-0.06em] text-white sm:text-5xl lg:text-7xl">
                 {personalInfo.name}
               </h1>
-              <p className="mt-4 flex flex-wrap items-baseline gap-x-2 gap-y-2 text-2xl font-medium text-white/90 sm:text-3xl lg:text-[2.35rem]">
-                <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-violet-300 bg-clip-text text-transparent">
+              <p className="mt-4 flex flex-wrap items-baseline gap-x-3 text-2xl font-medium text-white/90 sm:text-3xl lg:text-[2.35rem]">
+                <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-violet-200 bg-clip-text text-transparent">
                   Full Stack
                 </span>
                 <span>Developer</span>
                 <span className="terminal-caret text-violet-300">|</span>
               </p>
+
               <p className="mt-5 max-w-xl text-sm leading-6 text-white/65 sm:text-base">
                 I build responsive, user-friendly, and high-performance web applications that solve real-world problems.
               </p>
@@ -99,7 +114,6 @@ export default function Home() {
                 <div className="mt-4 flex items-center gap-4">
                   {socialLinks.map(({ label, href, icon: Icon }) => {
                     const external = href.startsWith('http')
-
                     return (
                       <a
                         key={label}
@@ -118,43 +132,78 @@ export default function Home() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.94 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.12, ease: [0.25, 1, 0.5, 1] }}
-              className="relative min-h-[360px] lg:min-h-[520px]"
+              transition={{ duration: 0.75, delay: 0.08, ease: [0.25, 1, 0.5, 1] }}
+              className="relative min-h-[380px] lg:min-h-[540px]"
             >
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="absolute h-[26rem] w-[26rem] rounded-full bg-violet-500/18 blur-3xl" />
+                <div className="absolute h-[28rem] w-[28rem] rounded-full bg-violet-500/18 blur-3xl" />
                 <div className="absolute h-[20rem] w-[20rem] rounded-full border border-white/10" />
                 <div className="absolute h-[31rem] w-[31rem] rounded-full border border-white/8" />
-                <div className="absolute h-[38rem] w-[38rem] rounded-full border border-white/[0.05]" />
-                <div className="absolute left-[10%] top-[12%] h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(168,85,247,0.9)]" />
-                <div className="absolute right-[12%] top-[10%] h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(168,85,247,0.9)]" />
-                <div className="absolute right-[6%] bottom-[26%] h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(168,85,247,0.9)]" />
-                <div className="absolute left-[2%] bottom-[18%] h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(168,85,247,0.9)]" />
+                <div className="absolute h-[40rem] w-[40rem] rounded-full border border-white/[0.05]" />
+                <div className="absolute left-[12%] top-[12%] h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(168,85,247,0.9)]" />
+                <div className="absolute right-[14%] top-[10%] h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(168,85,247,0.9)]" />
+                <div className="absolute right-[8%] bottom-[28%] h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(168,85,247,0.9)]" />
+                <div className="absolute left-[4%] bottom-[20%] h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(168,85,247,0.9)]" />
               </div>
 
-              <div className="absolute inset-x-8 bottom-0 top-6 rounded-[2rem] bg-[radial-gradient(circle_at_50%_35%,rgba(129,72,255,0.9),rgba(65,30,150,0.78)_26%,rgba(10,10,15,0.25)_58%,rgba(10,10,15,0)_72%)] opacity-95 blur-[1px]" />
-              <div className="absolute inset-x-10 bottom-0 top-12 rounded-[2rem] border border-white/6 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.08),transparent_35%)]" />
+              <div className="absolute inset-x-10 bottom-2 top-8 rounded-[2rem] bg-[radial-gradient(circle_at_50%_34%,rgba(133,79,255,0.95),rgba(63,29,145,0.72)_26%,rgba(10,10,15,0.25)_58%,rgba(10,10,15,0)_76%)] opacity-95 blur-[1px]" />
+              <div className="absolute inset-x-12 bottom-2 top-12 rounded-[2rem] border border-white/6 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.08),transparent_35%)]" />
 
-              <div className="absolute inset-x-14 bottom-0 top-8 flex items-end justify-center">
-                <div className="relative h-[92%] w-full max-w-[390px]">
-                  <div className="absolute left-1/2 top-2 h-28 w-28 -translate-x-1/2 rounded-full border border-white/18 bg-[radial-gradient(circle_at_35%_30%,#2b2b35,#101116_68%,#040507_100%)] shadow-[0_0_0_16px_rgba(107,70,193,0.06)]" />
-                  <div className="absolute left-1/2 top-16 h-[23rem] w-[18rem] -translate-x-1/2 rounded-[40%_40%_28%_28%/18%_18%_12%_12%] bg-[linear-gradient(180deg,#1b1a22_0%,#0f1016_38%,#090a0f_100%)] shadow-[0_0_0_1px_rgba(255,255,255,0.05)]" />
-                  <div className="absolute left-1/2 top-[4.25rem] h-44 w-44 -translate-x-1/2 rounded-full border border-white/10 bg-[radial-gradient(circle_at_50%_38%,rgba(255,255,255,0.18),rgba(24,25,35,0.95)_58%,rgba(6,7,10,0.98)_100%)] blur-[0.3px]" />
-                  <div className="absolute left-1/2 top-[7.5rem] h-[17rem] w-[14rem] -translate-x-1/2 rounded-[38%_38%_30%_30%/22%_22%_14%_14%] bg-[linear-gradient(180deg,#15161d,#0d0e13)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]" />
-                  <div className="absolute left-1/2 top-[6.8rem] h-24 w-[15rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(145,92,255,0.65),transparent_70%)] blur-2xl" />
-                  <div className="absolute left-1/2 top-[10.8rem] h-3 w-24 -translate-x-1/2 rounded-full bg-black/80" />
-                  <div className="absolute left-1/2 top-[11.8rem] h-48 w-[18rem] -translate-x-1/2 rounded-[46%_46%_25%_25%/16%_16%_12%_12%] bg-[linear-gradient(180deg,#20212a_0%,#11121a_30%,#090a10_100%)] shadow-[0_-18px_48px_rgba(0,0,0,0.45)]" />
-                  <div className="absolute left-1/2 top-[13rem] h-8 w-24 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.12),transparent_75%)]" />
-                  <div className="absolute left-1/2 top-[15.2rem] h-60 w-[15.5rem] -translate-x-1/2 rounded-[44%_44%_10%_10%/16%_16%_8%_8%] bg-[linear-gradient(180deg,#111118_0%,#090a0f_100%)]" />
-                  <div className="absolute bottom-0 left-1/2 h-16 w-[20rem] -translate-x-1/2 rounded-t-[48%] bg-[linear-gradient(180deg,#14151b,#0b0c10)]" />
-                  <div className="absolute bottom-6 left-1/2 h-24 w-[18rem] -translate-x-1/2 rounded-[35%_35%_14%_14%/28%_28%_10%_10%] bg-[linear-gradient(180deg,#191b23,#0c0d12)] shadow-[0_24px_50px_rgba(0,0,0,0.5)]" />
-                  <div className="absolute bottom-8 left-1/2 h-12 w-[20rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(145,92,255,0.24),transparent_70%)] blur-xl" />
-                  <div className="absolute inset-x-1/2 top-[9.4rem] h-[12.5rem] w-[8rem] -translate-x-1/2 rounded-[38%] border border-white/8" />
-                  <div className="absolute inset-x-1/2 top-[8.7rem] h-2 w-[12rem] -translate-x-1/2 rounded-full bg-white/10 blur-sm" />
-                  <div className="absolute inset-x-1/2 top-[6rem] h-10 w-[13rem] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.22),transparent_68%)] blur-2xl" />
-                  <div className="absolute bottom-[5.5rem] left-1/2 h-28 w-[20rem] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.08),transparent_72%)] blur-2xl" />
+              <div className="absolute inset-x-12 bottom-10 top-8 flex items-center justify-center">
+                <div className="relative w-full max-w-[430px]">
+                  <div className="absolute left-1/2 top-0 h-28 w-28 -translate-x-1/2 rounded-full border border-white/15 bg-[radial-gradient(circle_at_35%_30%,rgba(255,255,255,0.18),rgba(14,15,21,0.95)_70%,rgba(6,7,10,0.98)_100%)] shadow-[0_0_0_18px_rgba(107,70,193,0.06)]" />
+                  <div className="absolute left-1/2 top-7 h-14 w-14 -translate-x-1/2 rounded-full border border-white/10 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.25),rgba(255,255,255,0.08)_55%,rgba(10,10,15,0.95)_100%)]" />
+                  <div className="absolute left-1/2 top-10 h-56 w-[19rem] -translate-x-1/2 rounded-[38%_38%_24%_24%/18%_18%_12%_12%] bg-[linear-gradient(180deg,#171821_0%,#0e1016_42%,#090a0f_100%)] shadow-[0_0_0_1px_rgba(255,255,255,0.05)]" />
+                  <div className="absolute left-1/2 top-24 h-24 w-[17rem] -translate-x-1/2 rounded-[2rem] bg-[radial-gradient(circle_at_50%_0%,rgba(134,84,255,0.6),transparent_68%)] blur-2xl" />
+                  <div className="absolute left-1/2 top-24 h-28 w-28 -translate-x-1/2 rounded-full border border-white/12 bg-[radial-gradient(circle_at_35%_28%,rgba(255,255,255,0.12),rgba(19,20,28,0.95)_72%,rgba(6,7,10,0.98)_100%)]" />
+                  <div className="absolute left-1/2 top-[5.25rem] h-10 w-28 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.15),transparent_72%)] blur-xl" />
+                  <div className="absolute left-1/2 top-[6.1rem] h-40 w-[16.5rem] -translate-x-1/2 rounded-[42%_42%_28%_28%/20%_20%_12%_12%] bg-[linear-gradient(180deg,#11131a_0%,#090a10_100%)]" />
+                  <div className="absolute left-1/2 top-[7rem] h-24 w-16 -translate-x-1/2 rounded-[44%] border border-white/8 bg-[linear-gradient(180deg,#171923,#0d0e14)]" />
+                  <div className="absolute left-1/2 top-[7.65rem] h-4 w-20 -translate-x-1/2 rounded-full bg-black/80" />
+                  <div className="absolute left-1/2 top-[9.5rem] h-20 w-[14rem] -translate-x-1/2 rounded-[48%_48%_32%_32%/24%_24%_18%_18%] bg-[linear-gradient(180deg,#111219_0%,#090a10_100%)]" />
+                  <div className="absolute bottom-0 left-1/2 h-24 w-[20rem] -translate-x-1/2 rounded-t-[48%] bg-[linear-gradient(180deg,#15161d,#0b0c10)]" />
+                  <div className="absolute bottom-8 left-1/2 h-20 w-[17rem] -translate-x-1/2 rounded-[35%_35%_16%_16%/28%_28%_12%_12%] bg-[linear-gradient(180deg,#191b24,#0c0d12)] shadow-[0_24px_50px_rgba(0,0,0,0.45)]" />
+                  <div className="absolute bottom-12 left-1/2 h-12 w-[19rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(145,92,255,0.22),transparent_70%)] blur-xl" />
+
+                  <div className="absolute left-1/2 top-[12.25rem] flex w-[22rem] -translate-x-1/2 items-center justify-between gap-4 rounded-[24px] border border-white/10 bg-white/[0.04] px-4 py-3 backdrop-blur-xl">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(124,58,237,0.35)]">
+                        KP
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-white">Kanvi Panchal</p>
+                        <p className="text-xs text-white/55">Full Stack Web Developer</p>
+                      </div>
+                    </div>
+                    <Sparkles className="text-violet-300" size={18} />
+                  </div>
+
+                  <div className="absolute left-1/2 top-[15.8rem] w-[20rem] -translate-x-1/2 rounded-[22px] border border-white/10 bg-[#0a0b10]/90 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/45">
+                      <Code2 size={14} />
+                      Built for production
+                    </div>
+                    <pre className="mt-3 overflow-hidden text-left font-mono text-[11px] leading-5 text-white/72">
+                      {`const profile = {
+  focus: 'Responsive UI + APIs',
+  location: 'Mumbai, India',
+  stack: ['React', 'Node', 'MongoDB']
+}`}
+                    </pre>
+                  </div>
+
+                  <div className="absolute left-1/2 bottom-[1.05rem] flex w-[24rem] -translate-x-1/2 flex-wrap justify-center gap-2">
+                    {focusPoints.map((point) => (
+                      <span
+                        key={point}
+                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-white/70"
+                      >
+                        {point}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -162,9 +211,10 @@ export default function Home() {
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.18, ease: [0.25, 1, 0.5, 1] }}
-            className="relative z-10 mt-10 rounded-[26px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.2)] backdrop-blur-xl sm:mt-12 sm:p-6"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
+            className="relative z-10 mx-5 -mb-6 rounded-[26px] border border-white/10 bg-white/[0.045] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.2)] backdrop-blur-xl sm:mx-8 sm:p-6 lg:mx-12"
           >
             <div className="grid gap-4 divide-y divide-white/8 sm:grid-cols-2 sm:gap-0 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
               {heroStats.map((stat) => {
