@@ -17,11 +17,14 @@ export default function ClientWork() {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {clientWork.map((site) => (
           <Card key={site.id} hoverable as="a" href={`/client-work/${site.id}`}>
-            <div className="flex items-start justify-between">
+            <div className="flex items-start justify-between gap-3">
               <h3 className="font-medium text-[var(--text-primary)]">{site.name}</h3>
-              {site.confirmed && <Badge tone="success">Live</Badge>}
+              <Badge tone={site.status === 'in-progress' ? 'accent' : 'neutral'} className="shrink-0">
+                {site.status === 'in-progress' ? 'In Progress' : 'Completed'}
+              </Badge>
             </div>
             <p className="mt-2 text-sm text-[var(--text-secondary)]">{site.summary}</p>
+            <p className="mt-3 break-all text-xs text-[var(--accent)]">{new URL(site.url).hostname}</p>
             {site.tech.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
                 {site.tech.map((t) => <TechTag key={t}>{t}</TechTag>)}

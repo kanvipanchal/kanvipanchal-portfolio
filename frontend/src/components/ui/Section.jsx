@@ -18,7 +18,7 @@ export default function Section({
     surface: 'bg-[var(--bg-surface)]',
   }
   return (
-    <section id={id} className={cn('py-20 sm:py-28', tones[tone], className)}>
+    <section id={id} className={cn('portfolio-section py-16 sm:py-20', tones[tone], className)}>
       <Container size={size} className={containerClassName}>
         {children}
       </Container>

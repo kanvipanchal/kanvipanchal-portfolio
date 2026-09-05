@@ -45,7 +45,7 @@ export default function Contact() {
             <Mail size={18} className="text-[var(--accent)]" />
             <div>
               <p className="text-xs text-[var(--text-muted)]">Email</p>
-              <p className="text-sm text-[var(--text-primary)]">{personalInfo.email}</p>
+              <a href={`mailto:${personalInfo.email}`} className="break-all text-sm text-[var(--accent)] hover:underline">{personalInfo.email}</a>
             </div>
           </Card>
           <Card className="flex items-center gap-3">
@@ -57,7 +57,7 @@ export default function Contact() {
           </Card>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 sm:p-8">
           <div className="grid gap-5 sm:grid-cols-2">
             <Input label="Name" placeholder="Your name" error={errors.name?.message} {...register('name', nameRule)} />
             <Input label="Email" type="email" placeholder="you@company.com" error={errors.email?.message} {...register('email', emailRule)} />
@@ -84,7 +84,7 @@ export default function Contact() {
           </Button>
 
           {status === 'success' && (
-            <p className="text-sm text-emerald-500">Thanks — your inquiry has been sent. I'll be in touch soon.</p>
+            <p className="text-sm text-emerald-700">Thanks — your inquiry has been sent. I'll be in touch soon.</p>
           )}
           {status === 'error' && (
             <p className="text-sm text-red-500">

@@ -15,8 +15,9 @@ export default function Services() {
           These services are shaped by hands-on experience launching 10+ live websites for business and e-commerce clients.
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s) => (
+          {SERVICES.map((s, index) => (
             <Card key={s.title}>
+              <p className="mb-6 text-sm font-medium text-[var(--accent)]">{String(index + 1).padStart(2, '0')}</p>
               <h3 className="font-medium text-[var(--text-primary)]">{s.title}</h3>
               <p className="mt-2 text-sm text-[var(--text-secondary)]">{s.description}</p>
             </Card>

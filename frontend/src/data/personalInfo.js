@@ -5,6 +5,8 @@
  */
 export const personalInfo = {
   name: 'Kanvi Panchal',
+  // Set to a public image path, such as '/images/kanvi.jpg', when the portrait is ready.
+  photo: null,
   role: 'Full Stack Web Developer',
   tagline: 'I build fast, scalable web apps with the MERN stack.',
   summary:
@@ -23,7 +25,7 @@ export const personalInfo = {
   stats: [
     { label: 'Live Websites Shipped', value: '10+' },
     { label: 'CGPA', value: '9.91' },
-    { label: 'Since at PTCGRAM', value: 'Feb 2024-Present' },
+    { label: 'Current Role', value: 'Web Developer, Atharva University' },
     { label: 'Core Stack', value: 'MERN' },
   ],
 }
