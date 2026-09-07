@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Container from '@components/ui/Container.jsx'
-import ThemeToggle from '@components/ui/ThemeToggle.jsx'
 import Button from '@components/ui/Button.jsx'
 import { NAV_LINKS } from '@constants/navigation.js'
 import { cn } from '@utils/cn.js'
@@ -21,27 +20,27 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 transition-all duration-300',
+        'sticky top-0 z-50 bg-[var(--bg-canvas)]/95 backdrop-blur-md transition-shadow duration-300',
         scrolled
           ? 'border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]/85 backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent',
+          : 'border-b border-[var(--border-subtle)]',
       )}
     >
-      <Container className="flex h-16 items-center justify-between">
+      <Container className="flex h-20 items-center justify-between">
         <NavLink to="/" className="font-display text-lg font-semibold text-[var(--text-primary)]">
           Kanvi<span className="text-[var(--accent)]">.</span>dev
         </NavLink>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Main navigation" className="hidden items-center gap-0 xl:gap-1 lg:flex">
           {NAV_LINKS.map((link) => (
             <NavLink
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
                 cn(
-                  'rounded-[var(--radius-xs)] px-3 py-2 text-sm font-medium transition-colors',
+                  'rounded-[var(--radius-xs)] px-2 xl:px-3 py-2 text-xs xl:text-sm font-medium transition-colors',
                   isActive
-                    ? 'text-[var(--accent)]'
+                    ? 'bg-[var(--accent-soft)] text-[var(--accent)]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
                 )
               }
@@ -52,16 +51,16 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <ThemeToggle />
           <Button as="a" href="/contact" size="sm">
             Let's Talk
           </Button>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
           <button
             aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
             onClick={() => setOpen((v) => !v)}
             className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--text-primary)]"
           >
@@ -73,6 +72,8 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.nav
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

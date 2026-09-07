@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Send, Mail, Clock } from 'lucide-react'
+import { ArrowUpRight, Clock, Mail, MapPin, Send } from 'lucide-react'
 import Section from '@components/ui/Section.jsx'
 import Heading from '@components/ui/Heading.jsx'
 import Input from '@components/ui/Input.jsx'
@@ -17,7 +17,7 @@ export default function Contact() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm()
-  const [status, setStatus] = useState(null) // 'success' | 'error' | null
+  const [status, setStatus] = useState(null)
 
   const onSubmit = async (formData) => {
     setStatus(null)
@@ -32,66 +32,102 @@ export default function Contact() {
 
   return (
     <Section className="pt-16">
-      <Heading eyebrow="Get In Touch" size="display" as="h1" className="mb-4 max-w-xl">
-        Let's talk about your project.
+      <Heading eyebrow="Get In Touch" size="display" as="h1" className="max-w-2xl">
+        Let’s build something useful together.
       </Heading>
-      <p className="mb-12 max-w-xl text-[var(--text-secondary)]">
-        Fill out the form and I'll get back to you — {personalInfo.availability.responseTime.toLowerCase()}.
+      <p className="mt-5 max-w-xl text-base leading-8 text-[var(--text-secondary)]">
+        Have a project in mind, need help improving an existing product, or just want to connect? Tell me a little about it and I’ll get back to you {personalInfo.availability.responseTime.toLowerCase()}.
       </p>
 
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
-        <div className="space-y-4">
-          <Card className="flex items-center gap-3">
-            <Mail size={18} className="text-[var(--accent)]" />
-            <div>
-              <p className="text-xs text-[var(--text-muted)]">Email</p>
-              <p className="text-sm text-[var(--text-primary)]">{personalInfo.email}</p>
-            </div>
-          </Card>
-          <Card className="flex items-center gap-3">
-            <Clock size={18} className="text-[var(--accent)]" />
-            <div>
-              <p className="text-xs text-[var(--text-muted)]">Response Time</p>
-              <p className="text-sm text-[var(--text-primary)]">{personalInfo.availability.responseTime}</p>
-            </div>
-          </Card>
-        </div>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Input label="Name" placeholder="Your name" error={errors.name?.message} {...register('name', nameRule)} />
-            <Input label="Email" type="email" placeholder="you@company.com" error={errors.email?.message} {...register('email', emailRule)} />
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Input label="Company" placeholder="Optional" {...register('company')} />
-            <Input label="Phone" placeholder="Optional" error={errors.phone?.message} {...register('phone', phoneRule)} />
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Input label="Budget" placeholder="e.g. $1,000–$5,000" {...register('budget')} />
-            <Input label="Timeline" placeholder="e.g. 4–6 weeks" {...register('timeline')} />
-          </div>
-          <Input label="Project Type" placeholder="e.g. E-commerce website" {...register('projectType')} />
-          <Input
-            as="textarea"
-            label="Message"
-            placeholder="Tell me about your project..."
-            error={errors.message?.message}
-            {...register('message', messageRule)}
-          />
-
-          <Button type="submit" icon={Send} disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Inquiry'}
-          </Button>
-
-          {status === 'success' && (
-            <p className="text-sm text-emerald-500">Thanks — your inquiry has been sent. I'll be in touch soon.</p>
-          )}
-          {status === 'error' && (
-            <p className="text-sm text-red-500">
-              Couldn't send your message right now (backend not connected in this preview). Please email {personalInfo.email} directly.
+      <div className="mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
+        <aside className="space-y-5">
+          <div>
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-[var(--accent)]">Contact details</p>
+            <h2 className="mt-3 font-display text-2xl font-semibold">A simple way to start.</h2>
+            <p className="mt-3 max-w-md text-sm leading-7 text-[var(--text-secondary)]">
+              Prefer email? Reach out directly, or use the form and include as much context as you can.
             </p>
-          )}
-        </form>
+          </div>
+
+          <Card className="space-y-1.5 p-5">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
+              <Mail size={18} aria-hidden="true" />
+            </div>
+            <p className="pt-2 text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-muted)]">Email</p>
+            <a href={`mailto:${personalInfo.email}`} className="break-all text-base font-medium text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
+              {personalInfo.email}
+            </a>
+          </Card>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            <Card className="p-5">
+              <Clock size={18} className="text-[var(--accent)]" aria-hidden="true" />
+              <p className="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-muted)]">Response time</p>
+              <p className="mt-1 text-sm font-medium text-[var(--text-primary)]">{personalInfo.availability.responseTime}</p>
+            </Card>
+            <Card className="p-5">
+              <MapPin size={18} className="text-[var(--accent)]" aria-hidden="true" />
+              <p className="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-muted)]">Based in</p>
+              <p className="mt-1 text-sm font-medium text-[var(--text-primary)]">{personalInfo.location}</p>
+            </Card>
+          </div>
+
+          <div className="rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--accent-soft)] p-5">
+            <p className="flex items-center gap-2 text-sm font-medium text-[var(--text-primary)]">
+              <span className="h-2 w-2 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+              Currently available for new projects
+            </p>
+            <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+              Freelance, contract, and full-time opportunities are welcome.
+            </p>
+          </div>
+        </aside>
+
+        <Card as="form" onSubmit={handleSubmit(onSubmit)} className="p-5 sm:p-8">
+          <div className="flex flex-col gap-3 border-b border-[var(--border-subtle)] pb-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-[var(--accent)]">Project inquiry</p>
+              <h2 className="mt-2 font-display text-2xl font-semibold">Tell me about your idea.</h2>
+            </div>
+            <ArrowUpRight size={22} className="hidden text-[var(--accent)] sm:block" aria-hidden="true" />
+          </div>
+
+          <div className="mt-7 space-y-5">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Input label="Name" placeholder="Your name" error={errors.name?.message} {...register('name', nameRule)} />
+              <Input label="Email" type="email" placeholder="you@company.com" error={errors.email?.message} {...register('email', emailRule)} />
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Input label="Company" placeholder="Optional" {...register('company')} />
+              <Input label="Phone" placeholder="Optional" error={errors.phone?.message} {...register('phone', phoneRule)} />
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Input label="Budget" placeholder="e.g. $1,000–$5,000" {...register('budget')} />
+              <Input label="Timeline" placeholder="e.g. 4–6 weeks" {...register('timeline')} />
+            </div>
+            <Input label="Project Type" placeholder="e.g. E-commerce website" {...register('projectType')} />
+            <Input
+              as="textarea"
+              label="Message"
+              placeholder="What are you looking to build or improve?"
+              error={errors.message?.message}
+              {...register('message', messageRule)}
+            />
+
+            <Button type="submit" size="lg" icon={Send} disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send Inquiry'}
+            </Button>
+
+            {status === 'success' && (
+              <p role="status" className="rounded-[var(--radius-sm)] bg-emerald-50 px-4 py-3 text-sm text-emerald-800">Thanks — your inquiry has been sent. I’ll be in touch soon.</p>
+            )}
+            {status === 'error' && (
+              <p role="alert" className="rounded-[var(--radius-sm)] bg-red-50 px-4 py-3 text-sm text-red-700">
+                Couldn’t send your message right now. Please email {personalInfo.email} directly.
+              </p>
+            )}
+          </div>
+        </Card>
       </div>
     </Section>
   )

@@ -1,105 +1,89 @@
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
-import { GithubIcon } from '@components/ui/icons/BrandIcons.jsx'
+import { ArrowUpRight, Mail, UserRound } from 'lucide-react'
+import { GithubIcon, LinkedinIcon } from '@components/ui/icons/BrandIcons.jsx'
 import Section from '@components/ui/Section.jsx'
 import Heading from '@components/ui/Heading.jsx'
 import Button from '@components/ui/Button.jsx'
-import Badge from '@components/ui/Badge.jsx'
 import Card from '@components/ui/Card.jsx'
 import TechTag from '@components/ui/TechTag.jsx'
-import StatsBar from '@components/sections/StatsBar.jsx'
 import CTASection from '@components/sections/CTASection.jsx'
 import { personalInfo } from '@data/personalInfo.js'
 import { projects } from '@data/projects.js'
-import { experience } from '@data/experience.js'
 import { clientWork } from '@data/clientWork.js'
 
 export default function Home() {
+  const socialLinks = [
+    { label: 'GitHub', href: personalInfo.github, icon: GithubIcon },
+    { label: 'LinkedIn', href: personalInfo.linkedin, icon: LinkedinIcon },
+    { label: 'Email', href: `mailto:${personalInfo.email}`, icon: Mail },
+  ]
+
   return (
     <>
-      {/* HERO - signature terminal-style intro */}
-      <Section className="pt-16 sm:pt-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-          >
-            <Badge tone="accent" dot className="mb-6">Available for Freelance Projects</Badge>
-
-            <div className="mb-5 rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-3 font-mono text-sm text-[var(--text-secondary)]">
-              <span className="text-[var(--accent)]">const</span> developer = {'{'}
-              <br />
-              &nbsp;&nbsp;name: <span className="text-amber-400">"{personalInfo.name}"</span>,
-              <br />
-              &nbsp;&nbsp;stack: <span className="text-amber-400">"MERN"</span>
-              <span className="terminal-caret">|</span>
-              <br />
-              {'}'}
-            </div>
-
-            <Heading as="h1" size="display" className="max-w-xl">
-              Full Stack Developer building fast, scalable web products.
-            </Heading>
-
-            <p className="mt-5 max-w-lg text-base text-[var(--text-secondary)] sm:text-lg">
-              {personalInfo.summary}
+      <Section className="py-16 sm:py-20 lg:py-24">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
+          <div className="max-w-xl">
+            {personalInfo.availability.freelance && (
+              <p className="flex items-center gap-2.5 text-sm text-[var(--text-secondary)]">
+                <span className="h-2 w-2 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+                Available for freelance projects
+              </p>
+            )}
+            <p className="mt-9 text-base text-[var(--text-secondary)]">Hello, I'm</p>
+            <h1 className="mt-2 text-5xl font-semibold leading-[1.08] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+              {personalInfo.name}
+            </h1>
+            <p className="mt-5 font-display text-2xl font-medium text-[var(--accent)] sm:text-3xl">
+              {personalInfo.role}
             </p>
-            <p className="mt-3 max-w-lg text-sm font-medium text-[var(--accent)] sm:text-base">
-              Trusted across 10+ live website launches for businesses, brands, and e-commerce teams.
+            <p className="mt-6 max-w-lg text-base leading-8 text-[var(--text-secondary)]">
+              I build thoughtful, reliable web applications.
+              From responsive interfaces to scalable backends, I help turn ideas into products people enjoy using.
             </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button as="a" href="/projects" icon={ArrowRight}>
-                View Projects
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button as="a" href="/projects" size="lg" icon={ArrowUpRight}>
+                View My Work
               </Button>
-              <Button as="a" href="/contact" variant="secondary">
-                Hire Me
-              </Button>
-              <Button
-                as="a"
-                href={personalInfo.github}
-                target="_blank"
-                rel="noreferrer"
-                variant="ghost"
-                icon={GithubIcon}
-                iconPosition="left"
-              >
-                GitHub
+              <Button as="a" href="/resume" size="lg" variant="outline">
+                View Resume
               </Button>
             </div>
-
-            <div className="mt-8 flex flex-wrap gap-2">
-              {['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Firebase'].map((t) => (
-                <TechTag key={t}>{t}</TechTag>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
-            className="relative hidden lg:block"
-          >
-            <div className="absolute -inset-6 rounded-[var(--radius-xl)] bg-[var(--accent)]/10 blur-2xl" />
-            <Card className="relative">
-              <p className="mb-4 font-mono text-xs text-[var(--text-muted)]">// currently building</p>
-              <div className="space-y-3">
-                {experience.slice(0, 1).map((job) => (
-                  <div key={job.id}>
-                    <p className="font-medium text-[var(--text-primary)]">{job.role}</p>
-                    <p className="text-sm text-[var(--text-secondary)]">{job.company}</p>
-                    <p className="mt-1 font-mono text-xs text-[var(--accent)]">{job.period}</p>
-                  </div>
+            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <p className="text-sm text-[var(--text-secondary)]">{personalInfo.location}</p>
+              <div className="flex items-center gap-1">
+                {socialLinks.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel={href.startsWith('http') ? 'noreferrer' : undefined}
+                    aria-label={label}
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-surface-2)] hover:text-[var(--accent)]"
+                  >
+                    <Icon size={19} strokeWidth={1.7} />
+                  </a>
                 ))}
               </div>
-            </Card>
-          </motion.div>
-        </div>
-
-        <div className="mt-16">
-          <StatsBar stats={personalInfo.stats} />
+            </div>
+          </div>
+          <div className="mx-auto w-full max-w-[400px] lg:ml-auto lg:mr-0">
+            <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--bg-surface-2)]">
+              {personalInfo.photo ? (
+                <img
+                  src={personalInfo.photo}
+                  alt={personalInfo.name}
+                  width={400}
+                  height={500}
+                  fetchPriority="high"
+                  className="h-full w-full object-cover object-top"
+                />
+              ) : (
+                <div className="flex h-full flex-col items-center justify-center gap-4 text-[var(--text-muted)]">
+                  <UserRound size={56} strokeWidth={1} aria-hidden="true" />
+                  <p className="text-sm">Portrait coming soon</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </Section>
 

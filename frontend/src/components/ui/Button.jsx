@@ -3,7 +3,7 @@ import { cn } from '@utils/cn.js'
 
 const variants = {
   primary:
-    'bg-[var(--accent)] text-[var(--accent-contrast)] hover:opacity-90 shadow-[var(--shadow-soft)]',
+    'bg-[var(--accent)] text-[var(--accent-contrast)] hover:bg-[var(--accent-hover)]',
   secondary:
     'bg-[var(--bg-surface-2)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]',
   ghost: 'bg-transparent text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)]',
@@ -11,7 +11,7 @@ const variants = {
 }
 
 const sizes = {
-  sm: 'text-sm px-4 py-2 gap-1.5',
+  sm: 'text-sm px-4 py-2.5 gap-1.5',
   md: 'text-sm px-5 py-2.5 gap-2',
   lg: 'text-base px-6 py-3.5 gap-2.5',
 }
@@ -29,7 +29,7 @@ const Button = forwardRef(function Button(
       ref={ref}
       className={cn(
         'inline-flex items-center justify-center rounded-[var(--radius-sm)] font-medium',
-        'transition-all duration-200 ease-[var(--ease-out-quart)]',
+        'transition-colors duration-200 ease-[var(--ease-out-quart)]',
         'disabled:opacity-50 disabled:pointer-events-none',
         variants[variant],
         sizes[size],

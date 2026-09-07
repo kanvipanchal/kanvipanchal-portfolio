@@ -11,7 +11,7 @@ export default function TechTag({ children, className }) {
     <span
       className={cn(
         'inline-flex items-center rounded-[var(--radius-xs)] border border-[var(--border-subtle)]',
-        'bg-[var(--bg-surface-2)] px-2.5 py-1 font-mono text-xs text-[var(--text-secondary)]',
+        'bg-[var(--bg-surface-2)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]',
         className,
       )}
     >

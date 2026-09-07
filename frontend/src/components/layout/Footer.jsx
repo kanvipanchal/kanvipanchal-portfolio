@@ -8,7 +8,7 @@ import { personalInfo } from '@data/personalInfo.js'
 function LinkColumn({ title, links }) {
   return (
     <div>
-      <p className="mb-4 font-mono text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">{title}</p>
+      <p className="mb-4 font-semibold text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">{title}</p>
       <ul className="flex flex-col gap-2.5">
         {links.map((link) => (
           <li key={link.path}>
@@ -24,7 +24,7 @@ function LinkColumn({ title, links }) {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-surface)]">
+    <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-surface-2)]">
       <Container className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <p className="font-display text-lg font-semibold text-[var(--text-primary)]">

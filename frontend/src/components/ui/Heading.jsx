@@ -1,7 +1,7 @@
 import { cn } from '@utils/cn.js'
 
 const sizes = {
-  display: 'text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05]',
+  display: 'text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.12]',
   h1: 'text-3xl sm:text-4xl font-semibold leading-tight',
   h2: 'text-2xl sm:text-3xl font-semibold leading-tight',
   h3: 'text-xl sm:text-2xl font-semibold leading-snug',
@@ -13,7 +13,7 @@ export default function Heading({ children, as: Tag = 'h2', size = 'h2', classNa
   return (
     <div>
       {eyebrow && (
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-[var(--accent)]">
+        <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] before:h-px before:w-7 before:bg-[var(--accent)] text-[var(--accent)]">
           {eyebrow}
         </p>
       )}
