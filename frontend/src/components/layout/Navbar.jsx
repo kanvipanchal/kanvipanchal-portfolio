@@ -26,7 +26,7 @@ export default function Navbar() {
           : 'border-b border-[var(--border-subtle)]',
       )}
     >
-      <Container className="flex h-20 items-center justify-between">
+      <Container className="flex h-18 items-center justify-between sm:h-20">
         <NavLink to="/" className="font-display text-lg font-semibold text-[var(--text-primary)]">
           Kanvi<span className="text-[var(--accent)]">.</span>dev
         </NavLink>
@@ -62,7 +62,7 @@ export default function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-navigation"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--text-primary)]"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--text-primary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -88,7 +88,7 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      'rounded-[var(--radius-xs)] px-3 py-2.5 text-sm font-medium',
+                    'rounded-[var(--radius-xs)] px-3 py-3 text-sm font-medium',
                       isActive ? 'text-[var(--accent)]' : 'text-[var(--text-secondary)]',
                     )
                   }
@@ -96,6 +96,9 @@ export default function Navbar() {
                   {link.label}
                 </NavLink>
               ))}
+              <Button as="a" href="/contact" size="md" className="mt-3 w-full" onClick={() => setOpen(false)}>
+                Let's Talk
+              </Button>
             </Container>
           </motion.nav>
         )}

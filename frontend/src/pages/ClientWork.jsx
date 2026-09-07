@@ -5,7 +5,25 @@ import TechTag from '@components/ui/TechTag.jsx'
 import { ExternalLink } from 'lucide-react'
 import { clientWork } from '@data/clientWork.js'
 
+const clientWorkOrder = [
+  'tangerine',
+  'ilika',
+  'ptcgram',
+  'ptc-group-india',
+  'futurex',
+  'ptc-logistics',
+  'ss-packaging',
+  'kedos',
+  'devang-organics',
+  'zaura-care',
+]
+
 export default function ClientWork() {
+  const orderedClientWork = [
+    ...clientWorkOrder.map((id) => clientWork.find((site) => site.id === id)).filter(Boolean),
+    ...clientWork.filter((site) => !clientWorkOrder.includes(site.id)),
+  ]
+
   return (
     <Section className="pt-16">
       <Heading eyebrow="Production Websites" size="display" as="h1" className="mb-12 max-w-xl">
@@ -15,7 +33,7 @@ export default function ClientWork() {
         A snapshot of the client work behind 10+ live website launches across business, brand, and e-commerce projects.
       </p>
       <div className="grid gap-6 sm:grid-cols-2">
-        {clientWork.map((site) => (
+        {orderedClientWork.map((site) => (
           <Card key={site.id} hoverable as="a" href={`/client-work/${site.id}`}>
             <p className="font-mono text-xs text-[var(--accent)]">{site.industry}</p>
             <h3 className="mt-1 font-display text-xl font-semibold">{site.name}</h3>

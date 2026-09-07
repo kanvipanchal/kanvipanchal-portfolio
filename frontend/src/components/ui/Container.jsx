@@ -11,7 +11,7 @@ export default function Container({ children, className, size = 'default', as: T
     wide: 'max-w-7xl',
   }
   return (
-    <Tag className={cn('mx-auto w-full px-5 sm:px-8 lg:px-10', widths[size], className)}>
+    <Tag className={cn('mx-auto w-full px-4 sm:px-8 lg:px-10', widths[size], className)}>
       {children}
     </Tag>
   )

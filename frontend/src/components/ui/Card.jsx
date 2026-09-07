@@ -9,7 +9,7 @@ export default function Card({ children, className, hoverable = false, as: Tag =
     <Tag
       className={cn(
         'portfolio-card block min-w-0 rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-surface)]',
-        'p-6 transition-all duration-300 ease-[var(--ease-out-quart)]',
+        'p-5 sm:p-6 transition-all duration-300 ease-[var(--ease-out-quart)]',
         hoverable && 'hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow)] hover:border-[var(--accent)] cursor-pointer',
         className,
       )}

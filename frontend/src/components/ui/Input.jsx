@@ -22,7 +22,7 @@ const Input = forwardRef(function Input(
         id={inputId}
         ref={ref}
         className={cn(
-          'w-full rounded-[var(--radius-sm)] border bg-[var(--bg-surface)] px-4 py-3 text-sm',
+          'w-full rounded-[var(--radius-sm)] border bg-[var(--bg-surface)] px-4 py-3 text-base sm:text-sm',
           'text-[var(--text-primary)] placeholder:text-[var(--text-muted)]',
           'transition-colors duration-200 focus:ring-2 focus:ring-[var(--accent-soft)]',
           error ? 'border-red-500' : 'border-[var(--border-subtle)] focus:border-[var(--accent)]',
