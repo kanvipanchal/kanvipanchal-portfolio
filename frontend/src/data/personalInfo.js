@@ -5,7 +5,7 @@
  */
 export const personalInfo = {
   name: 'Kanvi Panchal',
-  photo: '/ME.png',
+  photo: '/ME.webp',
   role: 'Full Stack Web Developer',
   tagline: 'I build fast, scalable web apps with the MERN stack.',
   summary:
