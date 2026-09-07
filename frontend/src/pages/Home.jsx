@@ -40,7 +40,7 @@ export default function Home() {
               From responsive interfaces to scalable backends, I help turn ideas into products people enjoy using.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button as="a" href="/projects" size="lg" icon={ArrowUpRight}>
+              <Button as="a" href="/client-work" size="lg" icon={ArrowUpRight}>
                 View My Work
               </Button>
               <Button as="a" href="/resume" size="lg" variant="outline">

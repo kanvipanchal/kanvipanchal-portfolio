@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Mail } from 'lucide-react'
+import { ChevronDown, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@components/ui/icons/BrandIcons.jsx'
 import Container from '@components/ui/Container.jsx'
 import { FOOTER_LINKS } from '@constants/navigation.js'
@@ -22,10 +22,30 @@ function LinkColumn({ title, links }) {
   )
 }
 
+function LinkDropdown({ title, links }) {
+  return (
+    <details className="group border-b border-[var(--border-subtle)] last:border-b-0">
+      <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+        {title}
+        <ChevronDown size={16} className="transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
+      </summary>
+      <ul className="flex flex-col gap-3 pb-5">
+        {links.map((link) => (
+          <li key={link.path}>
+            <NavLink to={link.path} className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)]">
+              {link.label}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </details>
+  )
+}
+
 export default function Footer() {
   return (
     <footer className="border-t border-[var(--border-subtle)] bg-[var(--bg-surface-2)]">
-      <Container className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-5">
+      <Container className="py-12 lg:grid lg:grid-cols-5 lg:gap-12 lg:py-16">
         <div className="lg:col-span-2">
           <p className="font-display text-lg font-semibold text-[var(--text-primary)]">
             Kanvi<span className="text-[var(--accent)]">.</span>dev
@@ -60,9 +80,17 @@ export default function Footer() {
           </div>
         </div>
 
-        <LinkColumn title="Explore" links={FOOTER_LINKS.explore} />
-        <LinkColumn title="Resources" links={FOOTER_LINKS.resources} />
-        <LinkColumn title="Connect" links={FOOTER_LINKS.connect} />
+        <div className="mt-10 lg:col-span-3 lg:hidden">
+          <LinkDropdown title="Explore" links={FOOTER_LINKS.explore} />
+          <LinkDropdown title="Resources" links={FOOTER_LINKS.resources} />
+          <LinkDropdown title="Connect" links={FOOTER_LINKS.connect} />
+        </div>
+
+        <div className="hidden lg:contents">
+          <LinkColumn title="Explore" links={FOOTER_LINKS.explore} />
+          <LinkColumn title="Resources" links={FOOTER_LINKS.resources} />
+          <LinkColumn title="Connect" links={FOOTER_LINKS.connect} />
+        </div>
       </Container>
 
       <div className="border-t border-[var(--border-subtle)] py-6">
