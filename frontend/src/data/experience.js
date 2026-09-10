@@ -19,7 +19,7 @@ export const experience = [
     id: 'ptcgram',
     company: 'PTCGRAM Pvt. Ltd.',
     role: 'Website Developer',
-    period: 'Feb 2024 - Jun 2026',
+    period: 'Feb 2026 - Jun 2026',
     current: false,
     responsibilities: [
       'Built and maintained 10+ live business and e-commerce websites for real clients using the MERN stack and Next.js.',
