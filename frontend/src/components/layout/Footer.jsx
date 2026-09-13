@@ -12,7 +12,7 @@ function LinkColumn({ title, links }) {
       <ul className="flex flex-col gap-2.5">
         {links.map((link) => (
           <li key={link.path}>
-            <NavLink to={link.path} className="text text-[var(--text-secondary)] hover:text-[var(--accent)]">
+            <NavLink to={link.path} className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)]">
               {link.label}
             </NavLink>
           </li>

@@ -36,28 +36,29 @@ export default function Contact() {
       return
     }
 
-    const extraDetails = [
-      formData.company && `Company: ${formData.company}`,
-      formData.budget && `Budget: ${formData.budget}`,
-      formData.timeline && `Timeline: ${formData.timeline}`,
-    ].filter(Boolean)
-    const message = extraDetails.length > 0
-      ? `${formData.message}\n\nProject details\n${extraDetails.join('\n')}`
-      : formData.message
-    const body = new URLSearchParams({
+    const body = JSON.stringify({
       name: formData.name,
       email: formData.email,
+      company: formData.company || '',
       phone: formData.phone || '',
-      subject: formData.subject || '',
-      message,
+      budget: formData.budget || '',
+      timeline: formData.timeline || '',
+      projectType: formData.projectType || '',
+      message: formData.message,
       website: formData.website || '',
     })
     const controller = new AbortController()
-    const timeoutId = window.setTimeout(() => controller.abort(), 15_000)
+    const timeoutId = window.setTimeout(() => controller.abort(), 45_000)
 
     try {
-      const response = await fetch(googleScriptUrl, {
+      // Apps Script accepts JSON through e.postData.contents. text/plain keeps
+      // this a simple cross-origin request, without an OPTIONS preflight.
+      // Use a fresh URL for each submission's one-time ContentService redirect.
+      const requestUrl = new URL(googleScriptUrl)
+      requestUrl.searchParams.set('requestId', crypto.randomUUID())
+      const response = await fetch(requestUrl.toString(), {
         method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body,
         credentials: 'omit',
         redirect: 'follow',
@@ -155,14 +156,14 @@ export default function Contact() {
               <Input label="Email" type="email" placeholder="you@company.com" maxLength={254} error={errors.email?.message} {...register('email', emailRule)} />
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
-              <Input label="Company" placeholder="Optional" maxLength={250} {...register('company')} />
+              <Input label="Company" placeholder="Optional" maxLength={200} {...register('company')} />
               <Input label="Phone" placeholder="Optional" maxLength={40} error={errors.phone?.message} {...register('phone', phoneRule)} />
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
-              <Input label="Budget" placeholder="e.g. $1,000-$5,000" maxLength={250} {...register('budget')} />
-              <Input label="Timeline" placeholder="e.g. 4-6 weeks" maxLength={250} {...register('timeline')} />
+              <Input label="Budget" placeholder="e.g. $1,000-$5,000" maxLength={100} {...register('budget')} />
+              <Input label="Timeline" placeholder="e.g. 4-6 weeks" maxLength={100} {...register('timeline')} />
             </div>
-            <Input label="Project Type" placeholder="e.g. E-commerce website" maxLength={250} {...register('subject', { maxLength: { value: 250, message: 'Subject must be 250 characters or fewer' } })} error={errors.subject?.message} />
+            <Input label="Project Type" placeholder="e.g. E-commerce website" maxLength={250} {...register('projectType', { maxLength: { value: 250, message: 'Project type must be 250 characters or fewer' } })} error={errors.projectType?.message} />
             <Input
               as="textarea"
               label="Message"
