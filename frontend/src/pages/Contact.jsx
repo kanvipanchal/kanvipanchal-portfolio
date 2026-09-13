@@ -9,6 +9,7 @@ import Card from '@components/ui/Card.jsx'
 import { LinkedinIcon } from '@components/ui/icons/BrandIcons.jsx'
 import { personalInfo } from '@data/personalInfo.js'
 import { nameRule, emailRule, messageRule, phoneRule } from '@utils/validators.js'
+import { submitGoogleInquiry } from '@services/googleContactService.js'
 
 const googleScriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL?.trim()
 const isConfigured = googleScriptUrl
@@ -23,6 +24,7 @@ export default function Contact() {
     formState: { errors, isSubmitting },
   } = useForm()
   const [status, setStatus] = useState(null)
+  const [waitingForConfirmation, setWaitingForConfirmation] = useState(false)
 
   const onSubmit = async (formData) => {
     if (isSubmitting) return
@@ -36,7 +38,7 @@ export default function Contact() {
       return
     }
 
-    const body = JSON.stringify({
+    const fields = {
       name: formData.name,
       email: formData.email,
       company: formData.company || '',
@@ -46,27 +48,14 @@ export default function Contact() {
       projectType: formData.projectType || '',
       message: formData.message,
       website: formData.website || '',
-    })
-    const controller = new AbortController()
-    const timeoutId = window.setTimeout(() => controller.abort(), 45_000)
+    }
+    setWaitingForConfirmation(false)
+    const waitingId = window.setTimeout(() => setWaitingForConfirmation(true), 4_000)
 
     try {
-      // Apps Script accepts JSON through e.postData.contents. text/plain keeps
-      // this a simple cross-origin request, without an OPTIONS preflight.
-      // Use a fresh URL for each submission's one-time ContentService redirect.
-      const requestUrl = new URL(googleScriptUrl)
-      requestUrl.searchParams.set('requestId', crypto.randomUUID())
-      const response = await fetch(requestUrl.toString(), {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body,
-        credentials: 'omit',
-        redirect: 'follow',
-        signal: controller.signal,
-      })
-      const result = await response.json()
+      const result = await submitGoogleInquiry(googleScriptUrl, fields)
 
-      if (response.ok && result?.ok === true) {
+      if (result.ok) {
         reset()
         setStatus({ type: 'success', message: result.message || 'Thanks - your inquiry has been sent.' })
         return
@@ -78,11 +67,12 @@ export default function Contact() {
       })
     } catch {
       setStatus({
-        type: 'error',
-        message: 'Submission could not be confirmed. Your details have been kept in the form; please do not resend automatically, as your inquiry may already have been received.',
+        type: 'warning',
+        message: 'Confirmation is taking longer than expected. Your inquiry may already be saved. Please avoid sending it again; your details are kept here if you need them.',
       })
     } finally {
-      window.clearTimeout(timeoutId)
+      window.clearTimeout(waitingId)
+      setWaitingForConfirmation(false)
     }
   }
 
@@ -177,8 +167,8 @@ export default function Contact() {
               <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
             </div>
 
-            <Button type="submit" size="lg" icon={Send} disabled={isSubmitting}>
-              {isSubmitting ? 'Sending...' : 'Send Inquiry'}
+            <Button type="submit" size="lg" icon={Send} disabled={isSubmitting} aria-busy={isSubmitting}>
+              {isSubmitting ? (waitingForConfirmation ? 'Waiting for confirmation...' : 'Sending...') : 'Send Inquiry'}
             </Button>
 
             {status?.type === 'success' && (
@@ -186,6 +176,9 @@ export default function Contact() {
             )}
             {status?.type === 'error' && (
               <p role="alert" aria-live="assertive" className="rounded-[var(--radius-sm)] bg-red-50 px-4 py-3 text-sm text-red-700">{status.message}</p>
+            )}
+            {status?.type === 'warning' && (
+              <p role="status" aria-live="polite" className="rounded-[var(--radius-sm)] bg-amber-50 px-4 py-3 text-sm text-amber-900">{status.message}</p>
             )}
           </div>
         </Card>
