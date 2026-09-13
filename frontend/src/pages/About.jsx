@@ -1,6 +1,8 @@
+import { Download } from 'lucide-react'
 import Section from '@components/ui/Section.jsx'
 import Heading from '@components/ui/Heading.jsx'
 import Card from '@components/ui/Card.jsx'
+import Button from '@components/ui/Button.jsx'
 import { personalInfo, coreValues } from '@data/personalInfo.js'
 import { education, achievements } from '@data/experience.js'
 
@@ -15,6 +17,9 @@ export default function About() {
         <p className="mt-4 max-w-2xl text-sm font-medium text-[var(--accent)] sm:text-base">
           Over 10 live websites shipped for real businesses, with a focus on speed, clarity, and scalable builds.
         </p>
+        <Button as="a" href="/resume.pdf?v=af953baa" download="Kanvi Panchal.pdf" className="mt-6 w-full sm:w-auto" icon={Download}>
+          Download Resume
+        </Button>
       </Section>
 
       <Section tone="surface">

@@ -53,6 +53,12 @@ export default function ClientWorkDetail() {
       </Badge>
       <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">{site.summary}</p>
 
+      {site.url && (
+        <Button as="a" href={site.url} target="_blank" rel="noopener noreferrer" className="mt-6 w-full sm:w-auto" icon={ExternalLink}>
+          View Project
+        </Button>
+      )}
+
       {site.overview && (
         <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1.6fr_1fr]">
           <div>

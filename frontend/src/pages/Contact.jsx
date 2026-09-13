@@ -86,7 +86,7 @@ export default function Contact() {
       </p>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
-        <aside className="space-y-5">
+        <aside className="order-2 space-y-5 lg:order-1">
           <div>
             <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-[var(--accent)]">Contact details</p>
             <h2 className="mt-3 font-display text-2xl font-semibold">A simple way to start.</h2>
@@ -131,7 +131,7 @@ export default function Contact() {
           </div>
         </aside>
 
-        <Card as="form" onSubmit={handleSubmit(onSubmit)} className="p-5 sm:p-8" noValidate>
+        <Card as="form" onSubmit={handleSubmit(onSubmit)} className="order-1 p-5 sm:p-8 lg:order-2" noValidate>
           <div className="flex flex-col gap-3 border-b border-[var(--border-subtle)] pb-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-[var(--accent)]">Project inquiry</p>

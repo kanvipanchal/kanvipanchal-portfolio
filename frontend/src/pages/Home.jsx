@@ -71,7 +71,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="mx-auto w-full max-w-[320px] sm:max-w-[400px] lg:ml-auto lg:mr-0">
+          <div className="mx-auto w-full max-w-[320px] overflow-hidden rounded-3xl border border-[var(--border-subtle)] bg-[var(--accent-soft)] p-2 shadow-[var(--shadow-glow)] sm:max-w-[400px] lg:ml-auto lg:mr-0">
             <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--bg-surface-2)]">
               {personalInfo.photo ? (
                 <img

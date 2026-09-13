@@ -24,7 +24,7 @@ export const personalInfo = {
   stats: [
     { label: 'Live Websites Shipped', value: '10+' },
     { label: 'CGPA', value: '9.91' },
-    { label: 'Current Role', value: 'Web Developer, Atharva University' },
+    { label: 'Current Role', value: 'Full Stack Web Developer, Atharva University' },
     { label: 'Core Stack', value: 'MERN' },
   ],
 }
